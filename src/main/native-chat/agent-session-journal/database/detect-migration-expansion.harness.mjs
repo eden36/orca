@@ -87,8 +87,8 @@ const untouched = (session) => {
 }
 
 // The pass appended its tabs at the tail in the original's record order (a copy at its
-// original's place). The longest run of tabs, by position, in strictly increasing original order
-// whose chats were closed in the original is that block, minus any the user moved or closed since.
+// original's place). The longest run of tabs, by position, of original chats or copies in strictly
+// increasing original order is that block, minus any the user moved or closed since.
 const tabs = domain
   .prepare('SELECT tab_id,session_id,position FROM agent_session_tabs ORDER BY position')
   .all()
@@ -103,7 +103,7 @@ let last = -1
 for (const tab of tabs) {
   const original = copyOf.get(tab.session) ?? tab.session
   const r = rank.get(original)
-  if (r === undefined || !closedInOriginal(tab.session)) {
+  if (r === undefined) {
     run = []
     last = -1
     continue
@@ -143,6 +143,7 @@ const result = {
     firstPosition: block[0]?.position ?? null,
     lastPosition: block.at(-1)?.position ?? null,
     originals: blockOriginals.length,
+    originalsClosedInOriginal: blockOriginals.filter((tab) => closedInOriginal(tab.session)).length,
     originalsUntouched: untouchedOriginals.length,
     copies: blockCopies.length,
     copiesUntouched: untouchedCopies.length
