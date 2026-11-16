@@ -32,7 +32,7 @@ import {
   canReuseMobileSessionSnapshot
 } from './mobile-session-capture'
 import { selectFolderWorkspaces } from '@/store/workspaces/catalog/workspace-record-fields'
-import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
+import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/workspace-layout/layout-owner-switch'
 import type { AppState } from '@/store/types'
 import type { RuntimeMobileSessionTabsSnapshot } from '../../../../shared/remote-runtime/session-graph/runtime-session-contracts'
 import type { RuntimeMobileSessionSnapshotTab } from '../../../../shared/remote-runtime/session-graph/runtime-mobile-session-tab-contracts'
