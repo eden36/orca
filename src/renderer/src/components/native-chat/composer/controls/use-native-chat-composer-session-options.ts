@@ -18,7 +18,10 @@ type ComposerSessionOptionsArgs = Pick<
   | 'readTerminalScreen'
   | 'structuredTransport'
 > &
-  Pick<Parameters<typeof useNativeChatSessionOptionCommand>[0], 'disabled' | 'resolveTarget'>
+  Pick<
+    Parameters<typeof useNativeChatSessionOptionCommand>[0],
+    'disabled' | 'resolveTarget' | 'readTerminalDraft'
+  >
 
 export function useNativeChatComposerSessionOptions({
   agent,
@@ -26,6 +29,7 @@ export function useNativeChatComposerSessionOptions({
   onSlashCommand,
   onSubmitted,
   resolveTarget,
+  readTerminalDraft,
   terminalTabId,
   targetPtyId,
   onSwitchToTerminal,
@@ -43,7 +47,8 @@ export function useNativeChatComposerSessionOptions({
     disabled,
     onSlashCommand,
     onSubmitted,
-    resolveTarget
+    resolveTarget,
+    readTerminalDraft
   })
   const pty = useNativeChatSessionOptions({
     agent,

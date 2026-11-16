@@ -19,6 +19,7 @@ import {
 } from './claude-model-switch-confirmation'
 import type { NativeChatSessionOptionDispatchCommand } from '../../../../../../../shared/native-chat/input/session-options/native-chat-session-option-dispatch'
 import { translate } from '@/i18n/i18n'
+import { formatAgentTypeLabel } from '../../../../../../../shared/agent-status/presentation/agent-type-label'
 
 export function useNativeChatSessionOptionCommand(args: {
   agent: AgentType
@@ -26,8 +27,10 @@ export function useNativeChatSessionOptionCommand(args: {
   onSlashCommand?: (command: string) => void
   onSubmitted?: () => void
   resolveTarget: () => NativeChatResolvedTarget | null
+  /** The user's text on the agent's input line: '' when empty, null when unreadable. */
+  readTerminalDraft?: () => string | null
 }): { dispatch: NativeChatSessionOptionDispatchCommand; isDispatching: boolean } {
-  const { agent, disabled, onSlashCommand, onSubmitted, resolveTarget } = args
+  const { agent, disabled, onSlashCommand, onSubmitted, readTerminalDraft, resolveTarget } = args
   const mountedRef = useRef(true)
   const activeObserversRef = useRef(new Set<ClaudeModelSwitchConfirmationObserver>())
   const activeSendsRef = useRef(new Set<AbortController>())
@@ -76,6 +79,16 @@ export function useNativeChatSessionOptionCommand(args: {
             translate(
               'components.native-chat.sessionOption.commandCanceled',
               'Chat UI command was canceled because the composer closed.'
+            )
+          )
+        }
+        // The command would be appended to unsent terminal text and submitted with it.
+        if (readTerminalDraft?.()) {
+          throw new Error(
+            translate(
+              'components.native-chat.sessionOption.terminalHasDraft',
+              '{{agent}} has unsent text in the terminal. Send or clear it there, then try again.',
+              { agent: formatAgentTypeLabel(agent) }
             )
           )
         }
@@ -129,7 +142,7 @@ export function useNativeChatSessionOptionCommand(args: {
         }
       }
     },
-    [agent, disabled, onSlashCommand, onSubmitted, resolveTarget]
+    [agent, disabled, onSlashCommand, onSubmitted, readTerminalDraft, resolveTarget]
   )
 
   return { dispatch, isDispatching }

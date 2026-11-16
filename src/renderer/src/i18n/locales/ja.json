@@ -20541,7 +20541,8 @@
       "sessionOption": {
         "noLiveTerminal": "利用可能な稼働中のターミナルがありません。",
         "commandCanceled": "入力欄が閉じられたため、Chat UI コマンドはキャンセルされました。",
-        "commandRejected": "ターミナルがコマンドを受け付けませんでした。"
+        "commandRejected": "ターミナルがコマンドを受け付けませんでした。",
+        "terminalHasDraft": "{{agent}} のターミナルに未送信のテキストがあります。ターミナルで送信またはクリアしてから、もう一度お試しください。"
       },
       "sessionOptionErrors": {
         "startOnly": "このオプションはセッション開始時にのみ設定できます。",

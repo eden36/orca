@@ -20171,7 +20171,8 @@
       "sessionOption": {
         "noLiveTerminal": "Kein aktives Terminal verfügbar.",
         "commandCanceled": "Der Befehl der Chat-Oberfläche wurde abgebrochen, weil das Eingabefeld geschlossen wurde.",
-        "commandRejected": "Das Terminal hat den Befehl nicht angenommen."
+        "commandRejected": "Das Terminal hat den Befehl nicht angenommen.",
+        "terminalHasDraft": "{{agent}} hat ungesendeten Text im Terminal. Sende oder lösche ihn dort und versuche es dann erneut."
       },
       "sessionOptionErrors": {
         "startOnly": "Diese Option kann nur beim Start der Sitzung festgelegt werden.",

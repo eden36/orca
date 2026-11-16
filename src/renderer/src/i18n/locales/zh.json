@@ -20414,7 +20414,8 @@
       "sessionOption": {
         "noLiveTerminal": "没有可用的活动终端",
         "commandCanceled": "输入框已关闭，Chat UI 命令已取消",
-        "commandRejected": "终端未接受该命令"
+        "commandRejected": "终端未接受该命令",
+        "terminalHasDraft": "{{agent}} 的终端中有未发送的文本。请在终端中发送或清除后重试。"
       },
       "sessionOptionErrors": {
         "startOnly": "此选项只能在会话启动时设置",

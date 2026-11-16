@@ -1,5 +1,10 @@
 import { sendRuntimePtyInputVerified } from '@/runtime/hosted-terminals/input/runtime-terminal-verified-input'
 import { enqueueNativeChatPtySend } from './native-chat-pty-send-queue'
+import { NATIVE_CHAT_SUBMIT } from '../../../../../../../shared/native-chat/input/composer/native-chat-paste-bytes'
+import {
+  NATIVE_CHAT_SUBMIT_CHECK_MS,
+  nativeChatInputHoldsSentText
+} from './native-chat-submit-check'
 import {
   clearConfirmDurationMs,
   clearThenWrite,
@@ -20,7 +25,8 @@ export function sendNativeChatObservedWrites(
     ptyId,
     writes.reduce((total, write) => total + write.delayBeforeMs, 0) +
       clearConfirmDurationMs(options) +
-      (options.settleDelayMs ?? 0),
+      (options.settleDelayMs ?? 0) +
+      (options.confirmSubmit ? NATIVE_CHAT_SUBMIT_CHECK_MS : 0),
     ({ isCancelled, delay, markSubmitted, markWriteStarted }) => {
       let reportedUnconfirmed = false
       let acknowledged = true
@@ -34,11 +40,60 @@ export function sendNativeChatObservedWrites(
             options.onDeliverySettled?.(acknowledged)
             markSubmitted(acknowledged ? 'submitted' : 'uncertain')
           }
-          if (options.settleDelayMs) {
-            delay(options.settleDelayMs, finish)
-          } else {
-            finish()
+          const settle = (): void => {
+            if (options.settleDelayMs) {
+              delay(options.settleDelayMs, finish)
+            } else {
+              finish()
+            }
           }
+          const confirmSubmit = options.confirmSubmit
+          if (!confirmSubmit || !acknowledged) {
+            settle()
+            return
+          }
+          // An acknowledged Enter can still be dropped by a busy TUI; check the line, not the write.
+          const checkSubmitted = (resubmitted: boolean): void => {
+            delay(NATIVE_CHAT_SUBMIT_CHECK_MS, () => {
+              let held = false
+              try {
+                held = nativeChatInputHoldsSentText(confirmSubmit.readInputLine(), confirmSubmit.text)
+              } catch {
+                // An unreadable terminal cannot prove a dropped Enter.
+              }
+              if (!held) {
+                settle()
+                return
+              }
+              if (resubmitted) {
+                options.onWriteRejected?.()
+                options.onDeliverySettled?.(false)
+                markSubmitted('not-submitted')
+                return
+              }
+              void sendRuntimePtyInputVerified(ptyId, NATIVE_CHAT_SUBMIT, 'driving', writeOptions)
+                .then((accepted) => {
+                  if (isCancelled()) {
+                    return
+                  }
+                  if (accepted) {
+                    checkSubmitted(true)
+                    return
+                  }
+                  options.onWriteRejected?.()
+                  options.onDeliverySettled?.(false)
+                  markSubmitted('not-submitted')
+                })
+                .catch(() => {
+                  if (!isCancelled()) {
+                    options.onWriteUnconfirmed?.()
+                    options.onDeliverySettled?.(false)
+                    markSubmitted('uncertain')
+                  }
+                })
+            })
+          }
+          checkSubmitted(false)
           return
         }
         const send = (): void => {

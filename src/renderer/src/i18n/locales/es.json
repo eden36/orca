@@ -19957,7 +19957,8 @@
       "sessionOption": {
         "noLiveTerminal": "No hay ningún terminal activo disponible.",
         "commandCanceled": "Se canceló el comando de Chat UI porque se cerró el editor de mensajes.",
-        "commandRejected": "El terminal no aceptó el comando."
+        "commandRejected": "El terminal no aceptó el comando.",
+        "terminalHasDraft": "{{agent}} tiene texto sin enviar en el terminal. Envíalo o bórralo allí y vuelve a intentarlo."
       },
       "sessionOptionErrors": {
         "startOnly": "Esta opción solo se puede configurar al iniciar la sesión.",

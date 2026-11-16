@@ -210,6 +210,7 @@ export const NativeChatComposerPane = forwardRef<ComposerHandle, C.NativeChatCom
       onSlashCommand,
       onSubmitted,
       resolveTarget,
+      readTerminalDraft: launchSeed?.readTerminalDraft,
       terminalTabId,
       targetPtyId,
       onSwitchToTerminal,

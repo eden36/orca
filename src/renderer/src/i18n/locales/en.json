@@ -21519,7 +21519,8 @@
       "sessionOption": {
         "noLiveTerminal": "No live terminal is available.",
         "commandCanceled": "Chat UI command was canceled because the composer closed.",
-        "commandRejected": "The terminal did not accept the command."
+        "commandRejected": "The terminal did not accept the command.",
+        "terminalHasDraft": "{{agent}} has unsent text in the terminal. Send or clear it there, then try again."
       },
       "sessionOptionErrors": {
         "startOnly": "This option can only be set when the session starts.",

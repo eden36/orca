@@ -19862,7 +19862,8 @@
       "sessionOption": {
         "noLiveTerminal": "沒有可用的作用中終端機。",
         "commandCanceled": "輸入框已關閉，因此已取消聊天介面命令。",
-        "commandRejected": "終端機未接受此命令。"
+        "commandRejected": "終端機未接受此命令。",
+        "terminalHasDraft": "{{agent}} 的終端機中有未傳送的文字。請在終端機中傳送或清除後再試一次。"
       },
       "sessionOptionErrors": {
         "startOnly": "此選項只能在工作階段啟動時設定。",

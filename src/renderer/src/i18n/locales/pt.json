@@ -21626,7 +21626,8 @@
       "sessionOption": {
         "noLiveTerminal": "Nenhum terminal ativo está disponível.",
         "commandCanceled": "O comando da Interface de Chat foi cancelado porque o campo de texto foi fechado.",
-        "commandRejected": "O terminal não aceitou o comando."
+        "commandRejected": "O terminal não aceitou o comando.",
+        "terminalHasDraft": "{{agent}} tem texto não enviado no terminal. Envie ou apague-o lá e tente novamente."
       },
       "sessionOptionErrors": {
         "startOnly": "Esta opção só pode ser definida ao iniciar a sessão.",

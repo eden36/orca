@@ -20230,7 +20230,8 @@
       "sessionOption": {
         "noLiveTerminal": "Aucun terminal actif n'est disponible.",
         "commandCanceled": "La commande de Chat UI a été annulée, car la zone de saisie a été fermée.",
-        "commandRejected": "Le terminal n'a pas accepté la commande."
+        "commandRejected": "Le terminal n'a pas accepté la commande.",
+        "terminalHasDraft": "{{agent}} a du texte non envoyé dans le terminal. Envoyez-le ou effacez-le, puis réessayez."
       },
       "sessionOptionErrors": {
         "startOnly": "Cette option ne peut être définie qu’au démarrage de la session.",

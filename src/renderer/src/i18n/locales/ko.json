@@ -19449,7 +19449,8 @@
       "sessionOption": {
         "noLiveTerminal": "사용 가능한 활성 터미널이 없습니다.",
         "commandCanceled": "입력창이 닫혀 Chat UI 명령이 취소되었습니다.",
-        "commandRejected": "터미널이 명령을 수락하지 않았습니다."
+        "commandRejected": "터미널이 명령을 수락하지 않았습니다.",
+        "terminalHasDraft": "{{agent}}의 터미널에 보내지 않은 텍스트가 있습니다. 터미널에서 보내거나 지운 후 다시 시도하세요."
       },
       "sessionOptionErrors": {
         "startOnly": "이 옵션은 세션을 시작할 때만 설정할 수 있습니다.",

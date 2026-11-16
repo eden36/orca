@@ -20316,7 +20316,8 @@
       "sessionOption": {
         "noLiveTerminal": "Kullanılabilir etkin terminal yok.",
         "commandCanceled": "İleti düzenleyicisi kapatıldığı için Sohbet Arayüzü komutu iptal edildi.",
-        "commandRejected": "Terminal komutu kabul etmedi."
+        "commandRejected": "Terminal komutu kabul etmedi.",
+        "terminalHasDraft": "{{agent}} terminalinde gönderilmemiş metin var. Orada gönderin veya temizleyin, ardından tekrar deneyin."
       },
       "sessionOptionErrors": {
         "startOnly": "Bu seçenek yalnızca oturum başlatılırken ayarlanabilir.",
